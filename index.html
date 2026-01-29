@@ -1,14 +1,37 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
-  <link href='/style.css' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glass Todo Pro</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
-  <script defer type="text/javascript" src="/main.js"></script>
+    <div class="glass-container">
+        <div class="header">
+            <h1>Tareas</h1>
+            <span id="todo-counter">Pendientes: 0</span>
+        </div>
+
+        <form id="todo-form">
+            <input type="text" id="todo-input" placeholder="¿Qué sigue?" required>
+            <select id="todo-category">
+                <option value="azul">General</option>
+                <option value="rosa">Urgente</option>
+                <option value="verde">Personal</option>
+            </select>
+            <button type="submit"> + </button>
+        </form>
+
+        <div class="filters">
+            <button class="filter-btn active" data-filter="all">Todas</button>
+            <button class="filter-btn" data-filter="pending">Pendientes</button>
+            <button class="filter-btn" data-filter="rosa">Urgentes</button>
+        </div>
+
+        <ul id="todo-list"></ul>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
 </body>
 </html>

@@ -1,0 +1,200 @@
+/* 1. VARIABLES Y COLORES */
+:root {
+    /* Tus colores originales */
+    --primary-blue: rgb(39, 70, 245);
+    --soft-teal: oklch(0.87 0.15 181);
+    
+    /* Variaciones de categoría usando OKLCH (Matiz rotado) */
+    --cat-azul: oklch(0.87 0.15 245);
+    --cat-rosa: oklch(0.87 0.15 350);
+    --cat-verde: oklch(0.87 0.15 145);
+    
+    --glass-bg: rgba(255, 255, 255, 0.12);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --text-color: #ffffff;
+}
+
+/* 2. LAYOUT Y FONDO ANIMADO */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    overflow: hidden;
+    /* Degradado dinámico con tus colores */
+    background: linear-gradient(-45deg, var(--primary-blue), var(--soft-teal), #6a11cb, #2575fc);
+    background-size: 400% 400%;
+    animation: gradientMove 15s ease infinite;
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* 3. CONTENEDOR DE VIDRIO */
+.glass-container {
+    width: 90%;
+    max-width: 450px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px) saturate(160%);
+    -webkit-backdrop-filter: blur(15px) saturate(160%);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 2rem;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    color: var(--text-color);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+#todo-counter {
+    font-size: 0.8rem;
+    padding: 4px 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    border: 1px solid var(--glass-border);
+}
+
+#todo-counter.zero {
+    background: var(--soft-teal);
+    color: var(--primary-blue);
+    font-weight: bold;
+}
+
+/* 4. FORMULARIO Y FILTROS */
+#todo-form {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 1rem;
+}
+
+input, select, .filter-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--glass-border);
+    color: white;
+    padding: 10px;
+    border-radius: 12px;
+    outline: none;
+}
+
+input { flex: 2; }
+select { flex: 1; cursor: pointer; }
+
+input::placeholder { color: rgba(255, 255, 255, 0.5); }
+
+button[type="submit"] {
+    background: var(--soft-teal);
+    border: none;
+    color: var(--primary-blue);
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+button[type="submit"]:hover { transform: scale(1.05); }
+
+.filters {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 1.5rem;
+}
+
+.filter-btn {
+    flex: 1;
+    font-size: 0.7rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.filter-btn.active {
+    background: white;
+    color: var(--primary-blue);
+}
+
+/* 5. LISTA DE TAREAS */
+ul { list-style: none; }
+
+li {
+    background: rgba(255, 255, 255, 0.08);
+    margin-bottom: 10px;
+    padding: 12px 15px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 5px solid white;
+    transition: all 0.3s ease;
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Colores de Categoría */
+.cat-azul { border-left-color: var(--cat-azul); }
+.cat-rosa { border-left-color: var(--cat-rosa); }
+.cat-verde { border-left-color: var(--cat-verde); }
+
+.completed {
+    opacity: 0.4;
+    text-decoration: line-through;
+    filter: blur(0.5px);
+    transform: scale(0.97);
+}
+
+.task-content {
+    cursor: pointer;
+    flex: 1;
+}
+
+.task-content small {
+    display: block;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    opacity: 0.6;
+}
+
+.delete-btn {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    font-size: 1.1rem;
+    margin-left: 10px;
+}
+
+.delete-btn:hover { color: #ff4d4d; }
+
+/* 6. CONFETI */
+.confetti {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    top: -10px;
+    z-index: 1000;
+    animation: fall 3s linear forwards;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(105vh) rotate(720deg);
+    }
+}
